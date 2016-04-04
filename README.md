@@ -19,11 +19,8 @@ The Planned Table of Content is as follows:
 
 
 # 1. Fundamentals
-
 ## 1.1 General Introduction
-
 ### 1.1.1 The Concept of Visual Analytics
-
 1.1.2 The Analytical Process
 
 1.1.3 The Reusable Approach
