@@ -15,14 +15,14 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-NoDeriv
 
 http://creativecommons.org/licenses/by-nc-nd/3.0/
 
-THe Planned Table of Content is as follows:
+The Planned Table of Content is as follows:
 
 
-1. Fundamentals
+# 1. Fundamentals
 
-1.1 General Introduction
+## 1.1 General Introduction
 
-1.1.1 The Concept of Visual Analytics
+### 1.1.1 The Concept of Visual Analytics
 
 1.1.2 The Analytical Process
 
