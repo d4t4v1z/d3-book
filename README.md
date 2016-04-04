@@ -30,46 +30,46 @@ The Planned Table of Content is as follows:
 ###1.3.3 Starting with a basic graph
 #2. Using D3.js for Visual Analytics
 
-2.1 Key Elements of D3.js
+##2.1 Key Elements of D3.js
 
-2.1.1 DOM Elements and Data Handing
+###2.1.1 DOM Elements and Data Handing
 
-2.1.2 SVG Chart Building Blocks
+###2.1.2 SVG Chart Building Blocks
 
-2.1.3 D3 Margins, Scales & Axes
+###2.1.3 D3 Margins, Scales & Axes
 
-2.2 Building Visual Components
+##2.2 Building Visual Components
 
-2.2.1 Fundamental Components
+###2.2.1 Fundamental Components
 
-2.2.2 Interactive Charts
+###2.2.2 Interactive Charts
 
-2.2.3 Layouts
+###2.2.3 Layouts
 
-2.3 Handling Geospacial Data
+##2.3 Handling Geospacial Data
 
-3. Advanced Approaches
+#3. Advanced Approaches
 
-3.1 Dynamic Visualizations
+##3.1 Dynamic Visualizations
 
-3.1.1 Introduction
+###3.1.1 Introduction
 
-3.1.2 Creating User Interface Elements
+###3.1.2 Creating User Interface Elements
 
-3.1.3 Animation and Transition
+###3.1.3 Animation and Transition
 
-3.1.4 Drag, Zoom and Pan
+###3.1.4 Drag, Zoom and Pan
 
-3.2 Dynamic Data
+##3.2 Dynamic Data
 
-3.3 Beyond that single Analysis
+##3.3 Beyond that single Analysis
 
-3.3.1 Creating Dashboards with Bootstrap
+###3.3.1 Creating Dashboards with Bootstrap
 
-3.3.2 Advanced Data Handling
+###3.3.2 Advanced Data Handling
 
-3.3.3 Writing Layouts and Components
+###3.3.3 Writing Layouts and Components
 
-3.3.4 Getting Your Work public
+###3.3.4 Getting Your Work public
 
-4. Appendices
+#4. Appendices
