@@ -26,12 +26,9 @@ The Planned Table of Content is as follows:
 ##1.2 Core Concepts of Web Technology
 ##1.3 Getting Started with D3.js
 ###1.3.1 Setting up Your System
-
-1.3.2 Intro to D3
-
-1.3.3 Starting with a basic graph
-
-2. Using D3.js for Visual Analytics
+###1.3.2 Intro to D3
+###1.3.3 Starting with a basic graph
+#2. Using D3.js for Visual Analytics
 
 2.1 Key Elements of D3.js
 
