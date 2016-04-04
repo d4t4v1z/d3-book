@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="../dist/d3.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+           
+var svgContainer = d3.select("body").append("svg")
+                                    .attr("width", 1000)
+                                    .attr("height", 500);
+
+									
+var rectGroup = svgContainer.append("g");
+									
+//Draw red rectangle inside rectGroup	
+		rectGroup.append("rect")
+							.attr("x", 40)
+							.attr("y", 110)
+							.attr("width", 50)
+							.attr("height", 50)
+							.style("fill","red")
+							.style("stroke", "black")
+							.style("stroke-width", 2);
+//Draw green rectangle							
+		rectGroup.append("rect")
+							.attr("x", 120)
+							.attr("y", 40)
+							.attr("width", 50)
+							.attr("height", 50)
+							.style("fill","green")
+							.style("stroke", "black")
+							.style("stroke-width", 2);
+							
+//Draw a house		   
+var house = svgContainer.append("polygon")
+                         .style("fill", "orange")
+                         .style("stroke", "black")
+                         .style("stroke-width", 2)
+						 .attr("points", "33,60 63,30 73,40 73,30 85,30 85,52 93,60 85,60 85,90 70,90 70,70 56,70 56,90 41,90 41,60");		   		   	 
+//Draw a wrench							 
+var wrench = svgContainer.append("polygon")
+                         .style("fill", "blue")
+                         .style("stroke", "black")
+                         .style("stroke-width", 2)
+						 .attr("points", "110,160 132,138 132,124 146,110 158,110 160,112 145,127 154,136 169,121 171,123 171,135 157,149 143,149 121,171 115,171 110,166");		   		   	 
+
+//paint the rectangles yellow and move them to the right
+		rectGroup.selectAll("rect").style("fill","yellow");						
+		rectGroup.attr("transform","translate(200,0)"); 	
+
+		rectGroup.append("rect")
+							.attr("x", 120)
+							.attr("y", 110)
+							.attr("width", 50)
+							.attr("height", 50)
+							.style("fill","green")
+							.style("stroke", "black")
+							.style("stroke-width", 2);
+
+// house.attr("transform", "scale(1.5)"); 					 
+// house.attr("transform", "skewX(45)");		   
+// wrench.attr("transform", "translate(-40,-115) rotate (45 142 140)");
+							
+        </script>
+    </body>
+</html>
