@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            text    {font-size:0.75em;font-family:sans-serif}
+            .title  {font-weight:bold}
+            svg    {width:300px;height:220px;padding:5px;}
+            circle {fill:orange;stroke:grey;fill-opacity:0.9;}
+            .regLine    {stroke-width:1px; stroke:blue;}
+            rect   {fill:#f5f5f5}
+            .axis line {fill:none;stroke:#ddd;shape-rendering: crispEdges;}
+            .axis path  {fill:none;}
+            .axis text {font-size:0.7em;fill:#555;font-family:sans-serif}
+        </style>
+		<script type="text/javascript" src="../dist/d3.min.js"></script>
+		<script type="text/javascript" src="../dist/simple_statistics.js"></script>
+    </head>
+    <body>
+        <script>
+d3.csv("anscombe.csv",function(csv)	{
+    
+    //layout
+    var xOffset=25;
+    var yOffset=20;
+    var graphHeight=170;
+    var graphWidth=240;
+    
+    //co-erce data into integer
+    csv.forEach(function(d) {
+        d.x = +d.x;
+        d.y = +d.y;
+    });
+
+    //set data parameters
+    var xMin = 0;//we'll constrain graphs to 0 origins...
+    var xMax = d3.max(csv, function(d) { return d.x; });
+    var yMin = 0;
+    var yMax = d3.max(csv, function(d) { return d.y; });
+
+    //create scales
+    var xScale=d3.scale.linear()
+        .domain([xMin,xMax])
+        .range([xOffset,graphWidth])
+        .nice();
+    var yScale=d3.scale.linear()
+        .domain([yMin,yMax])
+        .range([graphHeight,yOffset])
+        .nice();
+    
+    //define an x axis
+    var xAxis=d3.svg.axis()
+        .scale(xScale)
+        .orient("bottom")
+        .tickSize(graphHeight-yOffset+5);
+    
+    //define a y axis
+    var yAxis=d3.svg.axis()
+        .scale(yScale)
+        .orient("left")
+        .tickSize(graphWidth-xOffset+5);
+
+    //create data object for each chart series
+	var plotdata=d3.nest()
+        .key(function(d){return d.seriesname;})
+        .entries(csv);
+	
+    //create svg element
+    var plots = d3.select("body").selectAll("svg")
+        .data(plotdata)
+        .enter()
+        .append("svg");
+    
+    //background rectangle
+    plots.append("rect")
+        .attr("width","100%")
+        .attr("height","100%");
+
+    //axes
+     plots.append("g")
+        .attr("class","axis")
+        .attr("transform","translate("+xOffset+","+(yOffset*2)+")")
+        .call(xAxis);
+    
+    plots.append("g")
+        .attr("class","axis")
+        .attr("transform","translate("+(xOffset+graphWidth)+","+yOffset+")")
+        .call(yAxis);
+    
+    plots.append("line")
+        .attr("class","regLine")
+        .attr("transform","translate("+xOffset+","+yOffset+")");
+    
+    //create points for each
+    plots.append("g").attr("transform","translate("+xOffset+","+yOffset+")")
+        .selectAll("circle")
+        .data(function(d){return d.values})
+        .enter()
+        .append("circle")
+        .attr("r",5)
+        .attr("cx",function(d){
+            return xScale(d.x);
+        })
+        .attr("cy",function(d){
+            return yScale(d.y);
+        });
+    
+    //plot title
+    plots.append("text")
+        .attr("class","title")
+        .attr("x",function(d){return xOffset+(graphWidth/2)})
+        .attr("y",20)
+        .text(function(d){return d.key});
+    
+   //calculate Anscombe's summary stats
+    plots.each(function (d,i){
+        var xArray = new Array();
+        var yArray = new Array();
+        var xyArray = new Array();
+        d3.select(this).selectAll("circle").each(function(d){
+            xArray.push(d.x);
+            yArray.push(d.y);
+            xyArray.push([d.x,d.y]);
+        });
+	//		console.log(xArray);	
+		
+        
+        //calculate linear regression
+        // var linReg = ss.linear_regression().data(xyArray).line();
+		var linReg = ss.linearRegressionLine(ss.linearRegression(xyArray));
+		console.log(linReg(0));
+        
+        //create text elements
+  //      var txtStat = d3.select(this)
+  //          .append("text")
+  //          .attr("y",yOffset+graphHeight+40);
+  //      txtStat.append("tspan")
+  //          .attr("x",xOffset)
+  //          .text("Mean of x: "+ss.mean(xArray));
+  //      txtStat.append("tspan")
+  //          .attr("x",xOffset)
+  //          .attr("dy","1.1em")
+  //          .text("Mean of y: "+ss.mean(yArray).toFixed(2));
+  //      txtStat.append("tspan")
+  //          .attr("x",xOffset)
+  //          .attr("dy","1.1em")
+  //          .text("Sample variance of x: "+ss.variance(xArray));
+  //      txtStat.append("tspan")
+  //          .attr("x",xOffset)
+  //          .attr("dy","1.1em")
+  //          .text("Sample variance of y: "+ss.variance(yArray).toFixed(3));
+  //      txtStat.append("tspan")
+  //          .attr("x",xOffset)
+  //          .attr("dy","1.1em")
+  //          .text("Correlation co-efficient: "+ss.sampleCorrelation(xArray,yArray).toFixed(2));
+        
+        //draw original state of the regression line
+        d3.select(this).select(".regLine")
+            .attr("x1",function(d){
+                return xScale(xMin);  
+            })
+            .attr("y1",function(d){
+                return yScale(linReg(xMin));  
+            })
+            .attr("x2",function(d){
+                return xScale(xMin);  
+            })
+            .attr("y2",function(d){
+                return yScale(linReg(xMin));  
+            })
+        
+		
+       //transition to final regression line
+        d3.select(this).select(".regLine")
+            .transition()
+            .duration(500)
+            .delay(500)
+            .attr("x2",function(d){
+                return xScale(xMax);  
+            })
+            .attr("y2",function(d){
+                return yScale(linReg(xMax));  
+            })
+       
+
+
+
+	   
+    });//end each plot
+    
+});
+        </script>
+    </body>
+</html>
