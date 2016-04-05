@@ -129,29 +129,7 @@ d3.csv("anscombe.csv",function(csv)	{
 		var linReg = ss.linearRegressionLine(ss.linearRegression(xyArray));
 		console.log(linReg(0));
         
-        //create text elements
-  //      var txtStat = d3.select(this)
-  //          .append("text")
-  //          .attr("y",yOffset+graphHeight+40);
-  //      txtStat.append("tspan")
-  //          .attr("x",xOffset)
-  //          .text("Mean of x: "+ss.mean(xArray));
-  //      txtStat.append("tspan")
-  //          .attr("x",xOffset)
-  //          .attr("dy","1.1em")
-  //          .text("Mean of y: "+ss.mean(yArray).toFixed(2));
-  //      txtStat.append("tspan")
-  //          .attr("x",xOffset)
-  //          .attr("dy","1.1em")
-  //          .text("Sample variance of x: "+ss.variance(xArray));
-  //      txtStat.append("tspan")
-  //          .attr("x",xOffset)
-  //          .attr("dy","1.1em")
-  //          .text("Sample variance of y: "+ss.variance(yArray).toFixed(3));
-  //      txtStat.append("tspan")
-  //          .attr("x",xOffset)
-  //          .attr("dy","1.1em")
-  //          .text("Correlation co-efficient: "+ss.sampleCorrelation(xArray,yArray).toFixed(2));
+
         
         //draw original state of the regression line
         d3.select(this).select(".regLine")
