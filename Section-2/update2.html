@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="../d3/d3.js"></script>
+    </head>
+    <body>
+	    <script type="text/javascript">
+			var data1 =[30, 20, 10]
+			var data2 =[10, 45]
+			var data4 =[24, 20]
+			var data3 =[50, 10, 40, 30, 25, 20]
+			/*The purpose of this 
+			*/
+			
+	    //creating the svg so I can draw objects on it
+			var svg = d3.select("body").append("svg")
+				.attr("width", 1900)
+				.attr("height", 5000)
+		
+				
+/*			//creating 3 initial circle objects
+	    	enter_update_exit(data1)
+*/
+
+		    //creating initial circle objects
+			var circle1 = svg.append("circle")
+				.attr("cx", 100)
+				.attr("cy", 100)
+				.attr("r", 30)
+
+		    // another circle object
+			var circle2 = svg.append("circle")
+				.attr("cx", 200)
+				.attr("cy", 100)
+				.attr("r", 20)
+
+
+		    // another circle object
+			var circle3 = svg.append("circle")
+				.attr("cx", 300)
+				.attr("cy", 100)
+				.attr("r", 10)
+
+			
+			// #1: Updating 2 circles and removing the last circle
+		    setTimeout( function(){
+		    	enter_update_exit(data2)
+		    }, 2000 )
+
+			// #2: Updating 2 circles 
+		    setTimeout( function(){
+		    	enter_update_exit(data4)
+		    }, 7000 )
+
+
+			// #3: Updating 2 circles and adding 4 circles 
+		    setTimeout( function(){
+		    	enter_update_exit(data3)
+		    }, 13000 )
+
+			
+			// #4: Updating 2 circles and deleting 4 circles 
+		    setTimeout( function(){
+		    	enter_update_exit(data2)
+		    }, 18000 )
+	    
+		    
+		    function enter_update_exit (data){
+
+				svg.selectAll("circle").transition()
+					.duration(200)
+					.style('fill', 'grey');		
+			
+		    	var circle_array = svg.selectAll("circle")
+		    		.data(data);
+
+		        //**********************************************************************************
+		        // Update: Every node that is already bound to data get´s updated data.
+		        //**********************************************************************************
+
+			    circle_array
+				.transition().duration(1000).delay(1000)
+			    .style('fill', 'orange')
+	            .transition().duration(1000).delay(3000)				
+			    .attr('r', function (d){
+		    		return d;
+		    	});
+
+				//**********************************************************************************
+		    	// Enter: all pieces of data that do not have a node to bind to. In this case where
+		    	// there are already three circles ('nodes') there would have to be more than 3 
+		    	// data2 points in our data2set to have enter run at all;
+		    	//**********************************************************************************
+		  		circle_array.enter()
+		  			.append("circle")
+		            .attr("cx", function(d, i){
+		                return (i + 1)*100
+		            })
+		    		.attr("cy", 100)
+					.attr("r", 0)
+					.attr("fill", "green")
+		        	.transition()
+		        	.duration(1000)
+		        	.attr("r", function (d){return d;});				
+		
+				
+			    //**********************************************************************************
+			    // Exit: Every node ('circles') that exists in your selection that you don't have
+			    // bound data2 to
+			    //**********************************************************************************
+			    circle_array.exit()
+				.transition().duration(1000).delay(1000)
+	            .style("fill", "red")
+	            .transition().duration(1000).delay(3000)
+				.attr("r", 0).transition().remove();
+
+				}
+        </script>
+	</body>
+</html>
